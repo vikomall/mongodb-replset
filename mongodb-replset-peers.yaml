@@ -85,6 +85,7 @@ resources:
       config_drive: "true"
       networks:
       - uuid: ec473e48-76f6-49bc-9cb2-9863399f9292
+      - uuid: 11111111-1111-1111-1111-111111111111
 
   # Attach a Rackconnected public ip to the server
   public_ip:
@@ -98,7 +99,7 @@ resources:
     properties:
       username: root
       private_key: { get_param: ssh_private_key }
-      host: { get_attr: [public_ip, public_ip_v4] }
+      host: { get_attr: [mongodb_peer_server, networks, private, 0] }
       kitchen: { get_param: kitchen }
       chef_version: { get_param: chef_version }
       node:
@@ -145,5 +146,5 @@ outputs:
     description: the private ip of the peer server
 
   accessIPv4:
-    value: { get_attr: [public_ip, public_ip_v4] }
+    value: { get_attr: [mongodb_peer_server, networks, private, 0] }
     description: the private ip of the peer server
