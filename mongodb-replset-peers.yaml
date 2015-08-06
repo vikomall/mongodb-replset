@@ -83,6 +83,14 @@ resources:
       image: { get_param: image }
       key_name: { get_param: ssh_key }
       config_drive: "true"
+      networks:
+      - uuid: ec473e48-76f6-49bc-9cb2-9863399f9292
+
+  # Attach a Rackconnected public ip to the server
+  public_ip:
+    type: Rackspace::RackConnect::PublicIP
+    properties:
+      server_id: { get_resource: mongodb_peer_server }
 
   server_setup:
     type: "OS::Heat::ChefSolo"
@@ -90,7 +98,7 @@ resources:
     properties:
       username: root
       private_key: { get_param: ssh_private_key }
-      host: { get_attr: [mongodb_peer_server, accessIPv4] }
+      host: { get_attr: [public_ip, accessIPv4] }
       kitchen: { get_param: kitchen }
       chef_version: { get_param: chef_version }
       node:
@@ -129,7 +137,7 @@ resources:
 outputs:
 
   server_public_ip:
-    value: { get_attr: [mongodb_peer_server, accessIPv4] }
+    value: { get_attr: [public_ip, accessIPv4] }
     description: "Server IP"
 
   privateIPv4:
@@ -137,5 +145,5 @@ outputs:
     description: the private ip of the peer server
 
   accessIPv4:
-    value: { get_attr: [mongodb_peer_server, accessIPv4] }
+    value: { get_attr: [public_ip, accessIPv4] }
     description: the private ip of the peer server
