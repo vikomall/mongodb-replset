@@ -98,7 +98,7 @@ resources:
     properties:
       username: root
       private_key: { get_param: ssh_private_key }
-      host: { get_attr: [public_ip, accessIPv4] }
+      host: { get_attr: [public_ip, public_ip_v4] }
       kitchen: { get_param: kitchen }
       chef_version: { get_param: chef_version }
       node:
@@ -137,7 +137,7 @@ resources:
 outputs:
 
   server_public_ip:
-    value: { get_attr: [public_ip, accessIPv4] }
+    value: { get_attr: [public_ip, public_ip_v4] }
     description: "Server IP"
 
   privateIPv4:
@@ -145,5 +145,5 @@ outputs:
     description: the private ip of the peer server
 
   accessIPv4:
-    value: { get_attr: [public_ip, accessIPv4] }
+    value: { get_attr: [public_ip, public_ip_v4] }
     description: the private ip of the peer server
