@@ -90,12 +90,13 @@ resources:
   # Attach a Rackconnected public ip to the server
   public_ip:
     type: Rackspace::RackConnect::PublicIP
+    depends_on: mongodb_peer_server
     properties:
       server_id: { get_resource: mongodb_peer_server }
 
   server_setup:
     type: "OS::Heat::ChefSolo"
-    depends_on: mongodb_peer_server
+    depends_on: public_ip
     properties:
       username: root
       private_key: { get_param: ssh_private_key }
