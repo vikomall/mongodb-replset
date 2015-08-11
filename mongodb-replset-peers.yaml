@@ -152,4 +152,4 @@ outputs:
 
   rackconnectIPv4:
     value: { get_attr: [mongodb_peer_server, networks, ec473e48-76f6-49bc-9cb2-9863399f9292, 0] }
-    description: the private ip of the peer server
+    description: the rackconnect ip of the peer server
