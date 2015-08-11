@@ -140,7 +140,7 @@ resources:
             bson_ext: '1.12.3'
           bind_ip: { get_attr: [mongodb_peer_servers, privateIPv4, 0] }
           use_fqdn: false
-          replicaset_members: { get_attr: [mongodb_peer_servers, privateIPv4] }
+          replicaset_members: { get_attr: [mongodb_peer_servers, rackconnectIPv4] }
           config:
             replset: myreplset
         rax:
