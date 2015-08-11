@@ -77,7 +77,8 @@ resources:
       key_name: { get_param: ssh_key }
       config_drive: "true"
       networks:
-      - uuid: ec473e48-76f6-49bc-9cb2-9863399f9292
+      - network: RC-rcheatdfwv3
+      #- uuid: ec473e48-76f6-49bc-9cb2-9863399f9292
       - uuid: 11111111-1111-1111-1111-111111111111
 
   # Attach a Rackconnected public ip to the server
