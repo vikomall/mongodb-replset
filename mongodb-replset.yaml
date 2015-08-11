@@ -24,6 +24,11 @@ parameter_groups:
 
 
 parameters:
+  rackconnected_network_name:
+    label: rackconnected network name
+    description: rackconnected network name
+    type: string
+
   server_hostname:
     label: Server Hostnames
     description: Defines how the server will be named.
@@ -122,6 +127,7 @@ resources:
           ssh_private_key: { get_attr: [ssh_key, private_key] }
           kitchen: { get_param: kitchen }
           chef_version: { get_param: chef_version }
+          rackconnected_network_name: {get_param: rackconnected_network_name}
 
   server_setup:
     type: "OS::Heat::ChefSolo"
